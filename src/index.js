@@ -2,17 +2,14 @@ import './styles.css';
 import Todo from './todo.js';
 import Project from './project.js';
 
-import Fetch from './fetch.js';
+import { format } from 'date-fns';
+
 import DOM from './dom.js';
 
-const mainContainer = document.querySelector('#content');
+DOM.loadProject(1);
+DOM.loadSidebar();
 
-const project = Fetch.getProject(1);
-const todos = Fetch.getProjectTodos(project.id);
-const title = DOM.createElement('h2', project.title);
-mainContainer.appendChild(title);
+const date = new Date();
 
-todos.forEach((todo) => {
-  const element = DOM.createElement('p', todo.title);
-  mainContainer.appendChild(element);
-});
+const dataEl = document.querySelector('.date');
+dataEl.textContent = format(date, 'eeee, dd MMMM yyyy');
