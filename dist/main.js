@@ -110,13 +110,23 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
 
 /***/ }),
 
+/***/ "./src/dom.js":
+/*!********************!*\
+  !*** ./src/dom.js ***!
+  \********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ DOM)\n/* harmony export */ });\nclass DOM {\n  static createElement(type, content) {\n    const element = document.createElement(type);\n    element.textContent = content;\n    return element;\n  }\n}\n\n\n//# sourceURL=webpack://odin-todo/./src/dom.js?");
+
+/***/ }),
+
 /***/ "./src/fetch.js":
 /*!**********************!*\
   !*** ./src/fetch.js ***!
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Fetch)\n/* harmony export */ });\nclass Fetch {\n  getAllProjects() {\n    return [\n      {\n        id: 1,\n        title: 'Project1',\n      },\n      {\n        id: 2,\n        title: 'Project2',\n      },\n      {\n        id: 3,\n        title: 'Project3',\n      },\n    ];\n  }\n  getAllTodos() {\n    return [\n      {\n        id: 1,\n        projectId: 1,\n        title: 'Todo1',\n      },\n      {\n        id: 2,\n        projectId: 1,\n        title: 'Todo2',\n      },\n      {\n        id: 3,\n        projectId: 3,\n        title: 'Todo3',\n      },\n    ];\n  }\n\n  getProjectTodos(id) {\n    return this.getAllTodos().filter((todo) => {\n      return todo.projectId === id;\n    });\n  }\n\n  getProject(id) {\n    return this.getAllProjects().filter((project) => {\n      return project.id === id;\n    })[0];\n  }\n  getTodo(id) {\n    return this.getAllTodos().filter((todo) => {\n      return todo.id === id;\n    })[0];\n  }\n}\n\n\n//# sourceURL=webpack://odin-todo/./src/fetch.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Fetch)\n/* harmony export */ });\n/* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./storage */ \"./src/storage.js\");\n\n\nclass Fetch {\n  static getAllProjects() {\n    return _storage__WEBPACK_IMPORTED_MODULE_0__[\"default\"].getLocalStorage('Projects');\n  }\n  static getAllTodos() {\n    return _storage__WEBPACK_IMPORTED_MODULE_0__[\"default\"].getLocalStorage('Todos');\n  }\n\n  static getProjectTodos(id) {\n    return this.getAllTodos().filter((todo) => {\n      return todo.projectId === id;\n    });\n  }\n\n  static getProject(id) {\n    return this.getAllProjects().filter((project) => {\n      return project.id === id;\n    })[0];\n  }\n  static getTodo(id) {\n    return this.getAllTodos().filter((todo) => {\n      return todo.id === id;\n    })[0];\n  }\n}\n\n\n//# sourceURL=webpack://odin-todo/./src/fetch.js?");
 
 /***/ }),
 
@@ -126,7 +136,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles.css */ \"./src/styles.css\");\n/* harmony import */ var _todo_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todo.js */ \"./src/todo.js\");\n/* harmony import */ var _project_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./project.js */ \"./src/project.js\");\n/* harmony import */ var _fetch_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./fetch.js */ \"./src/fetch.js\");\n/* harmony import */ var _storage_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./storage.js */ \"./src/storage.js\");\n/* harmony import */ var _parser_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./parser.js */ \"./src/parser.js\");\n\n\n\n\n\n\n\n\nconst mainContainer = document.querySelector('#content');\n\nconst fetcher = new _fetch_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"]();\nconst store = new _storage_js__WEBPACK_IMPORTED_MODULE_4__[\"default\"]();\nconst parser = new _parser_js__WEBPACK_IMPORTED_MODULE_5__[\"default\"]();\n// console.log(fetcher.getProject(1).title);\nconsole.log(fetcher.getAllProjects());\nconsole.log(fetcher.getAllTodos());\nconsole.log(fetcher.getProjectTodos(1));\nconsole.log(store.getLocalStorage('Project'));\nconsole.log(parser.encodeJSON(fetcher.getAllProjects()));\nconsole.log(parser.decodeJSON(parser.encodeJSON(fetcher.getAllProjects()))[0].id);\n\n\n//# sourceURL=webpack://odin-todo/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles.css */ \"./src/styles.css\");\n/* harmony import */ var _todo_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./todo.js */ \"./src/todo.js\");\n/* harmony import */ var _project_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./project.js */ \"./src/project.js\");\n/* harmony import */ var _fetch_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./fetch.js */ \"./src/fetch.js\");\n/* harmony import */ var _dom_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./dom.js */ \"./src/dom.js\");\n\n\n\n\n\n\n\nconst mainContainer = document.querySelector('#content');\n\nconst projects = _fetch_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"].getProject(1);\n\nconst title = _dom_js__WEBPACK_IMPORTED_MODULE_4__[\"default\"].createElement('h2', projects.title);\nmainContainer.appendChild(title);\n\n\n//# sourceURL=webpack://odin-todo/./src/index.js?");
 
 /***/ }),
 
@@ -136,7 +146,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _sty
   \***********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Parser)\n/* harmony export */ });\nclass Parser {\n  decodeJSON(data) {\n    return JSON.parse(data);\n  }\n  encodeJSON(data) {\n    return JSON.stringify(data);\n  }\n}\n\n\n//# sourceURL=webpack://odin-todo/./src/parser.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Parser)\n/* harmony export */ });\nclass Parser {\n  static decodeJSON(data) {\n    return JSON.parse(data);\n  }\n  static encodeJSON(data) {\n    return JSON.stringify(data);\n  }\n}\n\n\n//# sourceURL=webpack://odin-todo/./src/parser.js?");
 
 /***/ }),
 
@@ -156,7 +166,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Storage)\n/* harmony export */ });\nclass Storage {\n  getLocalStorage(localStorageName) {\n    const localStorage = window.localStorage;\n    if (!localStorage.getItem(localStorageName)) {\n      localStorage.setItem(localStorageName, 'test');\n    }\n    return localStorage.getItem(localStorageName);\n  }\n  storeProject() {\n    return;\n  }\n  storeTodo() {\n    return;\n  }\n}\n\n\n//# sourceURL=webpack://odin-todo/./src/storage.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Storage)\n/* harmony export */ });\n/* harmony import */ var _parser__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./parser */ \"./src/parser.js\");\n\n\nclass Storage {\n  static getLocalStorage(key) {\n    return !localStorage.getItem(key)\n      ? []\n      : _parser__WEBPACK_IMPORTED_MODULE_0__[\"default\"].decodeJSON(localStorage.getItem(key));\n  }\n\n  static store(key, value) {\n    return localStorage.setItem(key, _parser__WEBPACK_IMPORTED_MODULE_0__[\"default\"].encodeJSON(value));\n  }\n}\n\n\n//# sourceURL=webpack://odin-todo/./src/storage.js?");
 
 /***/ }),
 

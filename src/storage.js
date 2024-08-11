@@ -1,15 +1,13 @@
+import Parser from './parser';
+
 export default class Storage {
-  getLocalStorage(localStorageName) {
-    const localStorage = window.localStorage;
-    if (!localStorage.getItem(localStorageName)) {
-      localStorage.setItem(localStorageName, 'test');
-    }
-    return localStorage.getItem(localStorageName);
+  static getLocalStorage(key) {
+    return !localStorage.getItem(key)
+      ? []
+      : Parser.decodeJSON(localStorage.getItem(key));
   }
-  storeProject() {
-    return;
-  }
-  storeTodo() {
-    return;
+
+  static store(key, value) {
+    return localStorage.setItem(key, Parser.encodeJSON(value));
   }
 }

@@ -1,8 +1,8 @@
 export default class Parser {
-  decodeJSON(data) {
+  static decodeJSON(data) {
     return JSON.parse(data);
   }
-  encodeJSON(data) {
+  static encodeJSON(data) {
     return JSON.stringify(data);
   }
 }
