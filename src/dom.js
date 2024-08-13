@@ -15,10 +15,10 @@ export default class DOM {
     const title = document.querySelector('.project-title');
     const todoList = document.querySelector('.todolist');
 
-    title.textContent = project.title;
+    title.textContent = project?.title || '';
     todoList.textContent = '';
 
-    todos.forEach(({ title }) => {
+    todos?.forEach(({ title }) => {
       const element = DOM.createElement('h3', title);
       todoList.appendChild(element);
     });
@@ -26,16 +26,19 @@ export default class DOM {
 
   static loadSidebar() {
     const projects = Fetch.getAllProjects();
-    const sidebarNav = document.querySelector('.sidebar-nav');
-
-    projects.forEach(({ id, title }) => {
-      const button = DOM.createElement('button', title, 'btn');
-      button.dataset.id = id;
-      button.addEventListener('click', (e) => {
-        const id = e.currentTarget.dataset.id;
-        this.loadProject(parseInt(id));
-      });
-      sidebarNav.appendChild(button);
+    projects?.forEach(({ id, title }) => {
+      this.addSidebarItem({ id: id, title: title });
     });
+  }
+
+  static addSidebarItem({ id, title }) {
+    const sidebarNav = document.querySelector('.sidebar-nav');
+    const button = DOM.createElement('button', title, 'btn');
+    button.dataset.id = id;
+    button.addEventListener('click', (e) => {
+      const id = e.currentTarget.dataset.id;
+      this.loadProject(parseInt(id));
+    });
+    sidebarNav.appendChild(button);
   }
 }
