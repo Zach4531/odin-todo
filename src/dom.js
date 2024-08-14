@@ -25,7 +25,7 @@ export default class DOM {
   }
 
   static loadSidebar() {
-    const projects = Fetch.getAllProjects();
+    const projects = Fetch.getData();
     projects?.forEach(({ id, title }) => {
       this.addSidebarItem({ id: id, title: title });
     });

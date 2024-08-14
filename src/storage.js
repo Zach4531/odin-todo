@@ -23,13 +23,4 @@ export default class Storage {
   static storeTodo(value) {
     this.store('Todos', value);
   }
-
-  // static storeProject(value) {
-
-  //   this.getLocalStorage('Projects').push(value);
-
-  //   return localStorage.setItem('Projects', Parser.encodeJSON(projects));
-  // }
-
-  // static storeTodo(id, value) {}
 }
