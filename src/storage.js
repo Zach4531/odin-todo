@@ -1,26 +1,42 @@
 import Parser from './parser';
 import DOM from './dom';
 
-export default class Storage {
-  static getLocalStorage(key) {
-    const local = localStorage.getItem(key);
+const Storage = function () {
+  const projects = []
+};
 
-    !local && localStorage.setItem(key, '');
-    return !local ? [] : Parser.decodeJSON(local);
-  }
+// export default class Storage {
+//   constructor() {
+//     this.projects = this.getLocalStorage('Projects');
+//     this.todos = this.getLocalStorage('Todos');
+//   }
+//   static getLocalStorage(key) {
+//     const local = localStorage.getItem(key);
 
-  static store(key, value) {
-    let items = this.getLocalStorage(key);
-    items.push(value);
-    localStorage.setItem(key, Parser.encodeJSON(items));
-  }
+//     !local && localStorage.setItem(key, '');
+//     return !local ? [] : Parser.decodeJSON(local);
+//   }
 
-  static storeProject(value) {
-    this.store('Projects', value);
-    DOM.addSidebarItem(value);
-  }
+//   static store(key, value) {
+//     let items = this.getLocalStorage(key);
+//     items.push(value);
+//     localStorage.setItem(key, Parser.encodeJSON(items));
+//   }
 
-  static storeTodo(value) {
-    this.store('Todos', value);
-  }
-}
+//   static storeProject(value) {
+//     this.store('Projects', value);
+//     DOM.addSidebarItem(value);
+//   }
+
+//   static storeTodo(value) {
+//     this.store('Todos', value);
+//   }
+
+//   get projects() {
+//     return this.projects;
+//   }
+
+//   get todos() {
+//     return this.todos;
+//   }
+// }
