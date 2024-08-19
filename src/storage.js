@@ -1,9 +1,41 @@
 import Parser from './parser';
-import DOM from './dom';
 
-const Storage = function () {
-  const projects = []
-};
+const Storage = (function () {
+  let storage = {
+    projects: getLocalStorage('projects'),
+    todos: getLocalStorage('todos'),
+  };
+
+  function getLocalStorage(key) {
+    const local = localStorage.getItem(key);
+
+    !local && localStorage.setItem(key, '');
+    return !local ? [] : Parser.decodeJSON(local);
+  }
+
+  function store(key, value) {
+    const data = storage[key];
+    data.push(value);
+    localStorage.setItem(key, Parser.encodeJSON(data));
+  }
+
+  return {
+    get projects() {
+      return storage['projects'];
+    },
+    get todos() {
+      return storage['todos'];
+    },
+    set addProject(project) {
+      store('projects', project);
+    },
+    set addTodos(todo) {
+      store('todos', todo);
+    },
+  };
+})();
+
+export default Storage;
 
 // export default class Storage {
 //   constructor() {

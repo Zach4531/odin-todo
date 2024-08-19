@@ -8,9 +8,16 @@ export default class DOM {
     return element;
   }
 
+  static init() {
+    this.loadSidebar();
+    this.loadProject(Fetch.projects[0]['id']);
+  }
+
   static loadProject(id) {
     const project = Fetch.getProject(id);
     const todos = Fetch.getProjectTodos(id);
+
+    console.log(todos);
 
     const title = document.querySelector('.project-title');
     const todoList = document.querySelector('.todolist');
