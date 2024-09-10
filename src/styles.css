@@ -1,3 +1,8 @@
+:root {
+  --primary-color: rgb(18, 145, 219);
+  --primary-color-darken: rgb(10, 112, 172);
+}
+
 html {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -5,6 +10,15 @@ html {
 html,
 body {
   height: 100%;
+}
+
+button {
+  cursor: pointer;
+  background-color: transparent;
+  border: 0;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
 }
 
 * {
@@ -18,21 +32,18 @@ body {
 }
 
 #sidebar button {
-  background-color: transparent;
-  border: 0;
-  padding: 1rem;
+  padding: 1.2rem 1rem;
   width: 100%;
   border-radius: 0.5rem;
   text-align: left;
   font-size: 1rem;
-  font-weight: bold;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 #sidebar button:hover {
-  background-color: rgb(18, 145, 219);
+  background-color: var(--primary-color);
   color: #fff;
 }
 
@@ -79,6 +90,8 @@ main {
 body {
   display: grid;
   grid-template-columns: 325px 1fr;
+  max-width: 1920px;
+  margin: 0 auto;
 }
 nav {
   display: grid;
@@ -109,4 +122,24 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
+}
+
+.project-title button {
+  margin-left: auto;
+  background-color: var(--primary-color);
+  color: #fff;
+  transition: background-color 0.2s ease;
+  font-size: 1rem;
+  padding: 1rem 2rem;
+  border-radius: 5rem;
+}
+
+.project-title button:hover {
+  background-color: var(--primary-color-darken);
+}
+
+.project-title i {
+  font-size: 1rem;
+  cursor: pointer;
 }

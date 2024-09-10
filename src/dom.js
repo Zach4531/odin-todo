@@ -42,8 +42,12 @@ export default class DOM {
     const title = document.querySelector('.project-title');
     title.textContent = '';
     const titleHeading = DOM.createElement('h3', project?.title || '');
+    const editTitleBtn = DOM.createElement('i', '', ['fas', 'fa-edit']);
+    const addTask = DOM.createElement('button', 'Add Task', ['btn']);
 
     title.appendChild(titleHeading);
+    title.appendChild(editTitleBtn);
+    title.appendChild(addTask);
 
     const todoList = document.querySelector('.todolist');
 
