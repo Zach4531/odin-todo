@@ -1,4 +1,5 @@
 import Fetch from './fetch';
+import Storage from './storage';
 
 export default class DOM {
   static createElement(type, content = null, classes = null) {
@@ -6,6 +7,25 @@ export default class DOM {
     element.textContent = content;
     element.classList.add(classes);
     return element;
+  }
+
+  static createTodo({ title, id }) {
+    const container = DOM.createElement('div');
+    container.classList.add('todo-item');
+
+    const deleteBtn = DOM.createElement('button', 'Delete');
+    deleteBtn.addEventListener('click', () => {
+      Storage.deleteTodo(id);
+    });
+    const editBtn = DOM.createElement('button', 'Edit');
+    editBtn.addEventListener('click', () => {
+      alert('editied');
+    });
+
+    container.appendChild(deleteBtn);
+    container.appendChild(editBtn);
+
+    return container;
   }
 
   static init() {
@@ -17,22 +37,30 @@ export default class DOM {
     const project = Fetch.getProject(id);
     const todos = Fetch.getProjectTodos(id);
 
-    console.log(todos);
-
     const title = document.querySelector('.project-title');
+    title.textContent = project?.title || '';
+
+    const deleteBtn = DOM.createElement('a', 'Delete');
+    deleteBtn.addEventListener('click', () => {
+      Storage.deleteProject(id);
+    });
+    title.appendChild(deleteBtn);
     const todoList = document.querySelector('.todolist');
 
-    title.textContent = project?.title || '';
     todoList.textContent = '';
 
-    todos?.forEach(({ title }) => {
-      const element = DOM.createElement('h3', title);
+    todos?.forEach((todo) => {
+      const element = this.createTodo(todo);
       todoList.appendChild(element);
     });
   }
 
   static loadSidebar() {
+    const sidebar = document.querySelector('.sidebar-nav');
     const projects = Fetch.projects;
+
+    sidebar.textContent = '';
+
     projects?.forEach(({ id, title }) => {
       this.addSidebarItem({ id: id, title: title });
     });

@@ -1,3 +1,4 @@
+import DOM from './dom';
 import Parser from './parser';
 
 const Storage = (function () {
@@ -19,6 +20,29 @@ const Storage = (function () {
     localStorage.setItem(key, Parser.encodeJSON(data));
   }
 
+  function deleteTodo(id) {
+    const data = storage['todos'];
+    storage['todos'] = data.filter((item) => {
+      return item.id != id;
+    });
+    // localStorage.setItem(key, Parser.encodeJSON(newData));
+  }
+
+  function deleteProject(id) {
+    const projects = storage['projects'];
+    const todos = storage['todos'];
+
+    storage['projects'] = projects.filter((project) => {
+      return project.id != id;
+    });
+
+    storage['todos'] = todos.filter((todo) => {
+      return todo.projectId != id;
+    });
+
+    DOM.loadSidebar();
+  }
+
   return {
     get projects() {
       return storage['projects'];
@@ -32,6 +56,8 @@ const Storage = (function () {
     set addTodos(todo) {
       store('todos', todo);
     },
+    deleteProject,
+    deleteTodo,
   };
 })();
 

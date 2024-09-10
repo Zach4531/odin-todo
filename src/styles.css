@@ -64,7 +64,7 @@ main {
 
 body {
   display: grid;
-  grid-template-columns: 275px 1fr;
+  grid-template-columns: 315px 1fr;
 }
 nav {
   display: grid;
@@ -82,4 +82,12 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.todo-item {
+  display: flex;
+  border: 1px solid red;
+  padding: 1.5rem 1rem;
+  border-radius: 0.5rem;
+  justify-content: space-between;
 }
