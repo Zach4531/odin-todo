@@ -11,15 +11,24 @@ export default class DOM {
     return element;
   }
 
-  static createTodo({ title, id }) {
-    const container = DOM.createElement('div');
-    container.classList.add('todo-item');
+  static createButton(text, icon = null) {
+    const button = DOM.createElement('button', text, ['btn']);
+    if (icon) {
+      const iconEl = DOM.createElement('i', '', ['fas', `fa-${icon}`]);
+      button.appendChild(iconEl);
+    }
 
-    const deleteBtn = DOM.createElement('button', 'Delete');
+    return button;
+  }
+
+  static createTodo({ title, id }) {
+    const container = DOM.createElement('div', '', ['todo-item']);
+
+    const deleteBtn = DOM.createButton('Delete', 'trash');
     deleteBtn.addEventListener('click', () => {
       Storage.deleteTodo(id);
     });
-    const editBtn = DOM.createElement('button', 'Edit');
+    const editBtn = DOM.createButton('Edit', 'edit');
     editBtn.addEventListener('click', () => {
       alert('editied');
     });
@@ -42,12 +51,10 @@ export default class DOM {
     const title = document.querySelector('.project-title');
     title.textContent = '';
     const titleHeading = DOM.createElement('h3', project?.title || '');
-    const editTitleBtn = DOM.createElement('i', '', ['fas', 'fa-edit']);
-    const addTask = DOM.createElement('button', 'Add Task', ['btn']);
+    const editTitleBtn = DOM.createButton('Add Task', 'plus');
 
     title.appendChild(titleHeading);
     title.appendChild(editTitleBtn);
-    title.appendChild(addTask);
 
     const todoList = document.querySelector('.todolist');
 
@@ -72,7 +79,7 @@ export default class DOM {
 
   static addSidebarItem({ id, title }) {
     const sidebarNav = document.querySelector('.sidebar-nav');
-    const button = DOM.createElement('button', title, ['btn']);
+    const button = DOM.createButton(title);
     const icon = DOM.createElement('i', '', ['fa', 'fa-trash']);
 
     button.addEventListener('click', (e) => {
