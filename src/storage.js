@@ -41,6 +41,9 @@ const Storage = (function () {
     });
 
     DOM.loadSidebar();
+    if (storage['projects'].length > 0) {
+      DOM.loadProject(storage['projects'][0]['id']);
+    }
   }
 
   return {

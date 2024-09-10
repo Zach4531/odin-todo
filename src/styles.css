@@ -26,11 +26,25 @@ body {
   text-align: left;
   font-size: 1rem;
   font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #sidebar button:hover {
   background-color: rgb(18, 145, 219);
   color: #fff;
+}
+
+#sidebar button:hover i {
+  display: inline-block;
+}
+
+#sidebar i {
+  font-size: 0.8rem;
+  color: #fff;
+  display: none;
+  cursor: pointer;
 }
 
 #content {
@@ -64,7 +78,7 @@ main {
 
 body {
   display: grid;
-  grid-template-columns: 315px 1fr;
+  grid-template-columns: 325px 1fr;
 }
 nav {
   display: grid;
@@ -90,4 +104,9 @@ nav {
   padding: 1.5rem 1rem;
   border-radius: 0.5rem;
   justify-content: space-between;
+}
+.project-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

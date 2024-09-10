@@ -5,7 +5,9 @@ export default class DOM {
   static createElement(type, content = null, classes = null) {
     const element = document.createElement(type);
     element.textContent = content;
-    element.classList.add(classes);
+    if (classes) {
+      element.classList.add(...classes);
+    }
     return element;
   }
 
@@ -34,17 +36,15 @@ export default class DOM {
   }
 
   static loadProject(id) {
-    const project = Fetch.getProject(id);
+    const project = Fetch.getProject(parseInt(id));
     const todos = Fetch.getProjectTodos(id);
 
     const title = document.querySelector('.project-title');
-    title.textContent = project?.title || '';
+    title.textContent = '';
+    const titleHeading = DOM.createElement('h3', project?.title || '');
 
-    const deleteBtn = DOM.createElement('a', 'Delete');
-    deleteBtn.addEventListener('click', () => {
-      Storage.deleteProject(id);
-    });
-    title.appendChild(deleteBtn);
+    title.appendChild(titleHeading);
+
     const todoList = document.querySelector('.todolist');
 
     todoList.textContent = '';
@@ -68,12 +68,19 @@ export default class DOM {
 
   static addSidebarItem({ id, title }) {
     const sidebarNav = document.querySelector('.sidebar-nav');
-    const button = DOM.createElement('button', title, 'btn');
-    button.dataset.id = id;
+    const button = DOM.createElement('button', title, ['btn']);
+    const icon = DOM.createElement('i', '', ['fa', 'fa-trash']);
+
     button.addEventListener('click', (e) => {
-      const id = e.currentTarget.dataset.id;
       this.loadProject(parseInt(id));
     });
+
+    icon.addEventListener('click', (e) => {
+      e.stopPropagation();
+      Storage.deleteProject(id);
+    });
+
+    button.appendChild(icon);
     sidebarNav.appendChild(button);
   }
 }
